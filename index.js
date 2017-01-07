@@ -3,8 +3,14 @@ const url = require('url');
 
 const electron = require('electron');
 const {app, BrowserWindow, session} = electron;
+const {webRequest} = session.defaultSession;
 
-const htmlPath = path.join(__dirname, 'html');
+const pathTo = {
+    resourcesPath: path.join(__dirname, 'resources'),
+    resources: function(file) {
+        return path.join(this.resourcesPath, file);
+    }
+};
 
 app.on('ready', () => {
     var mainWindow = new BrowserWindow({
@@ -12,15 +18,18 @@ app.on('ready', () => {
         width: 800
     });
 
-    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    webRequest.onHeadersReceived((details, callback) => {
         if(details.responseHeaders['x-frame-options']) {
             delete details.responseHeaders['x-frame-options'];
         }
-        callback({cancel: false, responseHeaders: details.responseHeaders});
+        callback({
+            cancel: false,
+            responseHeaders: details.responseHeaders
+        });
     });
 
     mainWindow.loadURL(url.format({
-        pathname: path.join(htmlPath, 'index.html'),
+        pathname: pathTo.resources('index.html'),
         slashes: true,
         protocol: 'file:'
     }));
