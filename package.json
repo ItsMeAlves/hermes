@@ -1,0 +1,26 @@
+{
+    "name": "hermes",
+    "version": "1.0.0",
+    "description": "Cross-platform interface to WhatsApp",
+    "main": "index.js",
+    "scripts": {
+	"start": "electron .",
+	"test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+	"type": "git",
+	"url": "git+https://github.com/ItsMeAlves/hermes.git"
+    },
+    "keywords": [
+	"whatsapp"
+    ],
+    "author": "Gabriel Alves",
+    "license": "ISC",
+    "bugs": {
+	"url": "https://github.com/ItsMeAlves/hermes/issues"
+    },
+    "homepage": "https://github.com/ItsMeAlves/hermes#readme",
+    "dependencies": {
+	"electron": "^1.6.11"
+    }
+}
